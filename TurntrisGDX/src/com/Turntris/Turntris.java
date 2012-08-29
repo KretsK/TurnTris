@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -28,14 +27,13 @@ public class Turntris implements ApplicationListener {
 	OrthographicCamera camera;
 	SpriteBatch batch;
 	Rectangle bucket;
-	Array<Rectangle> raindrops;
+	Array<Raindrop> raindrops;
 	long lastDropTime;
 	Texture SquareImage;
 	Rectangle Square;
 	
 	Texture SpriteSheet;
 	Sprite block;
-	Sprite raindrop;
 	Sprite pail;
 
 	@Override
@@ -63,7 +61,7 @@ public class Turntris implements ApplicationListener {
 	      bucket.width = 48;
 	      bucket.height = 48;
 
-	      raindrops = new Array<Rectangle>();
+	      raindrops = new Array<Raindrop>();
 	      spawnRaindrop();
 	      //***************************Turntris Code****************
 	      
@@ -77,7 +75,6 @@ public class Turntris implements ApplicationListener {
 	      
 	      SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
 	      pail = new Sprite(SpriteSheet, 200, 1,98,98);
-	      raindrop = new Sprite(SpriteSheet, 101, 1,98,98);
 	      block = new Sprite(SpriteSheet, 0, 1,98,98);
 	      
 	      
@@ -115,12 +112,10 @@ public class Turntris implements ApplicationListener {
 	      //raindrop.draw(batch);
 	      
 	      
-	      for(Rectangle drop: raindrops) {
-	          raindrop.setPosition(drop.x,drop.y);
-	          raindrop.draw(batch);
-	    	  //batch.draw(dropImage, drop.x, drop.y);
-	         // raindrop.setColor(MathUtils.random(5,10)/10f,MathUtils.random(5,10)/10f,MathUtils.random(7,10)/10f,1);
-	       }
+	      for(Raindrop drop: raindrops) 
+	      { 
+	          drop.draw(batch);
+	    }
 	      batch.end();
 	      
 	      if(Gdx.input.isTouched()) {
@@ -138,15 +133,14 @@ public class Turntris implements ApplicationListener {
 	      if(Square.x > 1000 - 10) Square.x = 1000 - 10;
 
 	      if(TimeUtils.nanoTime() - lastDropTime > 1000000000) spawnRaindrop();
-	      Iterator<Rectangle> iter = raindrops.iterator();
+	      Iterator<Raindrop> iter = raindrops.iterator();
 	      while(iter.hasNext()) {
-	         Rectangle raindrop = iter.next();
-	         raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
-	         if(raindrop.y + 48 < 0) iter.remove();
-	         if(raindrop.overlaps(Square)) {
-	             dropSound.play();
-	             iter.remove();
-	          }
+	         Raindrop raindrop = iter.next();
+	         if (raindrop.update(Square) == false)
+	         {
+	        	 iter.remove();
+	         }
+	          
 	      }
 	      
 	      //*********TurnTris Code************
@@ -169,7 +163,7 @@ public class Turntris implements ApplicationListener {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+//		 TODO Auto-generated method stub
 		 dropImage.dispose();
 	      bucketImage.dispose();
 	      dropSound.dispose();
@@ -178,12 +172,7 @@ public class Turntris implements ApplicationListener {
 
 	}
 	 private void spawnRaindrop() {
-	      Rectangle raindrop = new Rectangle();
-	      raindrop.x = MathUtils.random(0, 1000-48);
-	      raindrop.y = 1000;
-	      raindrop.width = 100;
-	      raindrop.height = 100;
-	      raindrops.add(raindrop);
+	      raindrops.add(new Raindrop());
 	      lastDropTime = TimeUtils.nanoTime();
 	      
 	      
