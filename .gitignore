@@ -1,0 +1,8 @@
+obj/
+bin/
+*.class
+.metadata/
+header.java
+.settings/
+*.log
+.DS_Store/
