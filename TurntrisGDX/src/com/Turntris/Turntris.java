@@ -33,8 +33,10 @@ public class Turntris implements ApplicationListener {
 	Rectangle Square;
 	
 	Texture SpriteSheet;
-	Sprite block;
+	
 	Sprite pail;
+	Array<Block> blocks;
+	
 
 	@Override
 	public void create() {
@@ -75,8 +77,16 @@ public class Turntris implements ApplicationListener {
 	      
 	      SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
 	      pail = new Sprite(SpriteSheet, 200, 1,98,98);
-	      block = new Sprite(SpriteSheet, 0, 1,98,98);
+	      //block = new Sprite(SpriteSheet, 0, 1,98,98);
 	      
+	      blocks= new Array<Block>();
+	      
+	      for(int i = 0;i<10;i++)
+	      {
+	    	  blocks.add(new Block());
+	    	  blocks.get(i).setPositionX(i*100);
+	    	  blocks.get(i).setPositionY(200);
+	      }
 	      
 	}
 
@@ -108,14 +118,21 @@ public class Turntris implements ApplicationListener {
 	      pail.setPosition(Square.x, Square.y);
 	      pail.draw(batch);
 	      
-	      block.draw(batch);
-	      //raindrop.draw(batch);
+	      //block.draw(batch);
 	      
 	      
 	      for(Raindrop drop: raindrops) 
 	      { 
 	          drop.draw(batch);
-	    }
+	      }
+	      
+	      
+	      
+	      for(Block block: blocks)
+	      {
+	    	  block.draw(batch);
+	      }
+	      
 	      batch.end();
 	      
 	      if(Gdx.input.isTouched()) {
@@ -123,7 +140,7 @@ public class Turntris implements ApplicationListener {
 	          touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 	          camera.unproject(touchPos);
 	          Square.x = touchPos.x - 100 / 2;
-	          pail.setPosition(Square.x, Square.y);
+	          //pail.setPosition(Square.x, Square.y);
 	       }
 	      
 	      if(Gdx.input.isKeyPressed(Keys.LEFT)) Square.x -= 200 * Gdx.graphics.getDeltaTime();
@@ -165,10 +182,12 @@ public class Turntris implements ApplicationListener {
 	public void dispose() {
 //		 TODO Auto-generated method stub
 		 dropImage.dispose();
-	      bucketImage.dispose();
-	      dropSound.dispose();
-	      //rainMusic.dispose();
-	      batch.dispose();
+	     bucketImage.dispose();
+	     dropSound.dispose();
+	     //rainMusic.dispose();
+	     batch.dispose();
+	     SquareImage.dispose();
+	    
 
 	}
 	 private void spawnRaindrop() {
