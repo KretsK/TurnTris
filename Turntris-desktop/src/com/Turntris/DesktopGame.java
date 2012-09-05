@@ -12,7 +12,7 @@ public class DesktopGame {
              cfg.title = "Turntris";
              cfg.useGL20 = true;
              cfg.width = 1000;
-             cfg.height = 1000;
+             cfg.height = 1100;
              new LwjglApplication(new Turntris(), cfg);
         	
         	

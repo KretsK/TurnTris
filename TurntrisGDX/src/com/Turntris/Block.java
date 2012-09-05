@@ -8,27 +8,31 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-public class Block {
-	
-	private static Texture SpriteSheet; 
-    private static Sprite sprite;
-    private Rectangle position = new Rectangle();
+public class Block
+{
+
+	private static Texture SpriteSheet;
+	private static Sprite sprite;
+	private Rectangle position = new Rectangle();
+	private Color purple = new Color(.8f, .5f, 1f, 1);
+	private Color blue = new Color(.2f, .5f, 1f, 1);
+	private Color green = new Color(.3f, 1f, .3f, 1);
+	private Color yellow = new Color(1f, 1f, .1f, 1);
 	private Color color;
-	
-	
+
 	public Block()
 	{
-		if(SpriteSheet==null)
+		if (SpriteSheet == null)
 		{
 			SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
-	    	sprite = new Sprite(SpriteSheet, 0, 1,98,98);
+			sprite = new Sprite(SpriteSheet, 0, 1, 98, 98);
 		}
-		
+		// sprite.setColor(randomSetColor());
 		position.width = 100;
 		position.height = 100;
-		color = new Color(MathUtils.random(5,10)/10f,MathUtils.random(5,10)/10f,MathUtils.random(7,10)/10f,1);
+		color = randomSetColor();
 	}
-	
+
 	public void draw(SpriteBatch batch)
 	{
 		sprite.setPosition(position.x, position.y);
@@ -40,19 +44,36 @@ public class Block {
 	{
 		return position.x;
 	}
-	
+
 	public float getPositionY()
 	{
 		return position.y;
 	}
-	
+
 	public void setPositionX(float x)
 	{
-		position.x=x;
+		position.x = x;
 	}
-	
+
 	public void setPositionY(float y)
 	{
-		position.y=y;
+		position.y = y;
+	}
+
+	public Color randomSetColor()
+	{
+		int rand = MathUtils.random(1, 4);
+
+		if (rand == 1)
+			return purple;
+		if (rand == 2)
+			return blue;
+		if (rand == 3)
+			return green;
+		if (rand == 4)
+			return yellow;
+
+		return purple;
+
 	}
 }
