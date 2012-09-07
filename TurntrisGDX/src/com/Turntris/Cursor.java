@@ -21,21 +21,23 @@ public class Cursor
 		if (SpriteSheet == null)
 		{
 			SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
-			sprite = new Sprite(SpriteSheet, 300, 1, 98, 98);
+			// sprite = new Sprite(SpriteSheet, 300, 1, 98, 98); this is for the
+			// white outlined square as first attempt
+			sprite = new Sprite(SpriteSheet, 400, 0, 200, 200);
 		}
 		position.x = 500;
 		position.y = 500;
-		position.width = 100;
-		position.height = 100;
+		position.width = 199; // set to 100 for 1 square cursor, but now I am
+								// trying 4 square cursors.
+		position.height = 199;
 		// color = new
 		// Color(MathUtils.random(5,10)/10f,MathUtils.random(5,10)/10f,MathUtils.random(5,10)/10f,1);
-
+		// sprite.scale((float) 1);
 	}
 
 	public void draw(SpriteBatch batch)
 	{
 		sprite.setPosition(position.x, position.y);
-		// sprite.setColor(color);
 		sprite.draw(batch);
 	}
 
@@ -72,12 +74,26 @@ public class Cursor
 
 			// Sets the limits of what the position can be by using the boundary
 			// conditions.
-			position.x = Math.max(Math.min(position.x, 900), 0);
-			position.y = Math.max(Math.min(position.y, 900), 0);
+			position.x = Math.max(Math.min(position.x, 800), 0); // set to 900
+																	// instead
+																	// of 800
+																	// for 2 by
+																	// 2 cursor.
+			position.y = Math.max(Math.min(position.y, 800), 0);
 
 			if (velocityX != 0 || velocityY != 0)
 				return true;
 		}
 		return false;
+	}
+
+	public boolean insideCursor(Block block)
+	{
+		if (position.overlaps(block.getRectangle()))
+		{
+			// dropSound.play();
+			return false;
+		}
+		return true;
 	}
 }

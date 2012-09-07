@@ -209,6 +209,17 @@ public class Turntris implements ApplicationListener
 		cursorTime += Gdx.graphics.getDeltaTime();
 		// System.out.println(cursorTime);
 
+		Iterator<Block> iterB = blocks.iterator();
+		while (iterB.hasNext())
+		{
+			Block block = iterB.next();
+			if (cursor.insideCursor(block) == false)
+			{
+				iterB.remove();
+			}
+
+		}
+
 	}
 
 	@Override

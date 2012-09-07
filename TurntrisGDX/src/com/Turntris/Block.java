@@ -25,11 +25,11 @@ public class Block
 		if (SpriteSheet == null)
 		{
 			SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
-			sprite = new Sprite(SpriteSheet, 0, 1, 98, 98);
+			sprite = new Sprite(SpriteSheet, 0, 1, 100, 100);
 		}
 		// sprite.setColor(randomSetColor());
-		position.width = 100;
-		position.height = 100;
+		position.width = 99;
+		position.height = 99;
 		color = randomSetColor();
 	}
 
@@ -58,6 +58,11 @@ public class Block
 	public void setPositionY(float y)
 	{
 		position.y = y;
+	}
+
+	public Rectangle getRectangle()
+	{
+		return position;
 	}
 
 	public Color randomSetColor()
