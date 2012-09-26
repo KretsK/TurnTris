@@ -23,7 +23,7 @@ public class Cursor
 
 	public Cursor()
 	{
-		randSprite = MathUtils.random(1, 2);
+		randSprite = MathUtils.random(1, 5);
 
 		if (SpriteSheet == null)
 		{
@@ -45,13 +45,50 @@ public class Cursor
 
 		if (randSprite == 2)
 		{
-			sprite = new Sprite(SpriteSheet, 0, 100, 200, 300);
+			sprite = new Sprite(SpriteSheet, 0, 100, 197, 300);
 			position1.x = 500;
 			position2.x = position3.x = position1.x;
 			position1.y = 500;
 			position2.y = position4.y = position1.y + 100;
 			position3.y = position2.y + 100;
 			position4.x = position1.x + 100;
+
+		}
+
+		if (randSprite == 3)
+		{
+			sprite = new Sprite(SpriteSheet, 200, 100, 200, 300);
+			position1.x = 500;
+			position2.x = position3.x = position1.x;
+			position1.y = 400;
+			position4.y = position1.y;
+			position2.y = position1.y + 100;
+			position3.y = position2.y + 100;
+			position4.x = position1.x + 100;
+
+		}
+
+		if (randSprite == 4)
+		{
+			sprite = new Sprite(SpriteSheet, 600, 0, 300, 200);
+			position1.x = 500;
+			position2.x = position3.x = position1.x + 100;
+			position1.y = 500;
+			position2.y = position1.y;
+			position3.y = position4.y = position1.y - 100;
+			position4.x = position1.x + 200;
+
+		}
+
+		if (randSprite == 5)
+		{
+			sprite = new Sprite(SpriteSheet, 900, 0, 100, 400);
+			position1.x = 500;
+			position4.x = position2.x = position3.x = position1.x;
+			position1.y = 300;
+			position2.y = position1.y + 100;
+			position3.y = position2.y + 100;
+			position4.y = position3.y + 100;
 
 		}
 
@@ -62,7 +99,10 @@ public class Cursor
 
 	public void draw(SpriteBatch batch)
 	{
-		sprite.setPosition(position1.x, position1.y);
+		if (randSprite == 4)
+			sprite.setPosition(position1.x, position3.y);
+		else
+			sprite.setPosition(position1.x, position1.y);
 		sprite.draw(batch);
 	}
 
@@ -111,12 +151,41 @@ public class Cursor
 				position3.y = position4.y = position1.y + 100;
 
 			}
+
 			if (randSprite == 2)
 			{
 				position2.x = position3.x = position1.x;
 				position2.y = position4.y = position1.y + 100;
 				position3.y = position2.y + 100;
 				position4.x = position1.x + 100;
+			}
+
+			if (randSprite == 3)
+			{
+				position2.x = position3.x = position1.x;
+				position4.y = position1.y;
+				position2.y = position1.y + 100;
+				position3.y = position2.y + 100;
+				position4.x = position1.x + 100;
+
+			}
+
+			if (randSprite == 4)
+			{
+				position2.x = position3.x = position1.x + 100;
+				position2.y = position1.y;
+				position3.y = position4.y = position1.y - 100;
+				position4.x = position1.x + 200;
+
+			}
+
+			if (randSprite == 5)
+			{
+				position4.x = position2.x = position3.x = position1.x;
+				position2.y = position1.y + 100;
+				position3.y = position2.y + 100;
+				position4.y = position3.y + 100;
+
 			}
 
 			if (velocityX != 0 || velocityY != 0)
