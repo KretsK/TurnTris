@@ -2,6 +2,7 @@ package com.Turntris;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Orientation
 {
@@ -10,7 +11,7 @@ public class Orientation
 	public Rotation Rotation;
 	private Sprite sprite;
 
-	// private Rectangle position = new Rectangle();
+	private Rectangle position = new Rectangle();
 
 	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y)
 	{
@@ -18,13 +19,54 @@ public class Orientation
 		Y = y;
 		Rotation = rotation;
 		sprite = spritetype.getSprite();
-		// sprite.rotate(Rotation.Degrees);
+		sprite.setRotation(Rotation.Degrees);
+
+		position.x = X * 100;
+		position.y = Y * 100;
+
 	}
 
 	public void draw(SpriteBatch batch)
 	{
-		sprite.setPosition(X * 100, Y * 100);
-
+		sprite.setPosition(position.x, position.y);
 		sprite.draw(batch);
 	}
+
+	public float getPositionX()
+	{
+		return position.x;
+	}
+
+	public float getPositionY()
+	{
+		return position.y;
+	}
+
+	public void setPositionX(float x)
+	{
+		position.x = x;
+	}
+
+	public void setPositionY(float y)
+	{
+		position.y = y;
+	}
+
+	public Rectangle getRectangle()
+	{
+		return position;
+	}
+
+	public void setPosition(float x, float y)
+	{
+		position.x = x;
+		position.y = y;
+	}
+
+	public void increment(float x, float y)
+	{
+		position.x += x;
+		position.y += y;
+	}
+
 }
