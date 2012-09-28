@@ -69,8 +69,6 @@ public class Turntris implements ApplicationListener
 
 		// ***************************Turntris Code****************
 
-		// SquareImage = new
-		// Texture(Gdx.files.internal("assets/Square100.png"));
 		Square = new Rectangle();
 		Square.x = 1000 / 2 - 10 / 2;
 		Square.y = 20;
@@ -121,7 +119,6 @@ public class Turntris implements ApplicationListener
 	@Override
 	public void resize(int width, int height)
 	{
-		// TODO Auto-generated method stub
 
 	}
 
@@ -138,13 +135,9 @@ public class Turntris implements ApplicationListener
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		// batch.draw(bucketImage, bucket.x, bucket.y);
-		// batch.draw(SquareImage, Square.x,Square.y);
 
 		pail.setPosition(Square.x, Square.y);
 		pail.draw(batch);
-
-		// block.draw(batch);
 
 		for (Raindrop drop : raindrops)
 		{

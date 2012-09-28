@@ -24,6 +24,9 @@ public class Orientation
 		position.x = X * 100;
 		position.y = Y * 100;
 
+		position.width = 99;
+		position.height = 99;
+
 	}
 
 	public void draw(SpriteBatch batch)

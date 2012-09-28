@@ -27,7 +27,7 @@ public class Block
 			SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
 			sprite = new Sprite(SpriteSheet, 0, 1, 100, 100);
 		}
-		// sprite.setColor(randomSetColor());
+
 		position.width = 99;
 		position.height = 99;
 		color = randomSetColor();
