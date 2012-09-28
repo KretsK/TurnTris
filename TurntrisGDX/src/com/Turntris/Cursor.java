@@ -1,5 +1,8 @@
 package com.Turntris;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,6 +16,7 @@ public class Cursor
 	private Orientation orient2;
 	private Orientation orient3;
 	private Orientation orient4;
+	private ArrayList<Orientation> Shape;
 
 	public Cursor()
 	{
@@ -59,6 +63,7 @@ public class Cursor
 			orient4 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0);
 		}
 
+		Shape = new ArrayList<Orientation>(Arrays.asList(orient1, orient2, orient3, orient4));
 	}
 
 	public void draw(SpriteBatch batch)
@@ -77,10 +82,28 @@ public class Cursor
 
 		if (time > .15)
 		{
-			orient1.increment(velocityX, velocityY);
-			orient2.increment(velocityX, velocityY);
-			orient3.increment(velocityX, velocityY);
-			orient4.increment(velocityX, velocityY);
+			boolean inBounds = true;
+			for (Orientation orient : Shape)
+			{
+				if (orient.getPositionX() < 900 && orient.getPositionY() < 900)
+				{
+					inBounds = true;
+				}
+				else
+				{
+					inBounds = false;
+					break;
+				}
+
+			}
+
+			if (inBounds == true)
+			{
+				for (Orientation orient : Shape)
+				{
+					orient.increment(velocityX, velocityY);
+				}
+			}
 
 			// Sets the limits of what the position can be by using the boundary
 			// conditions.

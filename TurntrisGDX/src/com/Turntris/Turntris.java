@@ -238,7 +238,6 @@ public class Turntris implements ApplicationListener
 		dropSound.dispose();
 		// rainMusic.dispose();
 		batch.dispose();
-		SquareImage.dispose();
 
 	}
 
