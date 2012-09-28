@@ -85,7 +85,7 @@ public class Cursor
 			boolean inBounds = true;
 			for (Orientation orient : Shape)
 			{
-				if (orient.getPositionX() < 900 && orient.getPositionY() < 900)
+				if (orient.getPositionX() + velocityX < 1000 && orient.getPositionX() + velocityX >= 0 && orient.getPositionY() + velocityY < 1000 && orient.getPositionY() + velocityY >= 0)
 				{
 					inBounds = true;
 				}
