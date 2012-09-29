@@ -25,7 +25,7 @@ public class Block
 		if (SpriteSheet == null)
 		{
 			SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
-			sprite = new Sprite(SpriteSheet, 0, 1, 100, 100);
+			sprite = new Sprite(SpriteSheet, 0, 1, 99, 99);
 		}
 
 		position.width = 99;
@@ -80,5 +80,10 @@ public class Block
 
 		return purple;
 
+	}
+
+	public Color getColor()
+	{
+		return color;
 	}
 }

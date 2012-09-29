@@ -206,9 +206,13 @@ public class Turntris implements ApplicationListener
 		while (iterB.hasNext())
 		{
 			Block block = iterB.next();
-			if (cursor.insideCursor(block) == false)
+			if (cursor.insideCursor(block) == false && cursor.insideCursor(iterB.next()) == false)
 			{
-				iterB.remove();
+				if (block.getColor().equals(iterB.next().getColor()))
+				{
+					// iterB.remove();
+				}
+
 			}
 
 		}
@@ -246,6 +250,11 @@ public class Turntris implements ApplicationListener
 		raindrops.add(new Raindrop());
 		lastDropTime = TimeUtils.nanoTime();
 
+	}
+
+	private boolean checkNeighbors()
+	{
+		return true;
 	}
 
 }

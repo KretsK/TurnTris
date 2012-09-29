@@ -45,26 +45,26 @@ public class Orientation
 		return position.y;
 	}
 
-	public void setPositionX(float x)
-	{
-		position.x = x;
-	}
-
-	public void setPositionY(float y)
-	{
-		position.y = y;
-	}
+	// public void setPositionX(float x)
+	// {
+	// position.x = x;
+	// }
+	//
+	// public void setPositionY(float y)
+	// {
+	// position.y = y;
+	// }
 
 	public Rectangle getRectangle()
 	{
 		return position;
 	}
 
-	public void setPosition(float x, float y)
-	{
-		position.x = x;
-		position.y = y;
-	}
+	// public void setPosition(float x, float y)
+	// {
+	// position.x = x;
+	// position.y = y;
+	// }
 
 	public void increment(float x, float y)
 	{
