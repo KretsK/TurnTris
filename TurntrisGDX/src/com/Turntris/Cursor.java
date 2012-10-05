@@ -125,4 +125,18 @@ public class Cursor
 		}
 		return true;
 	}
+	
+	public Orientation getOrient(int x)
+	{
+		if(x==1)
+			return orient1;
+		if(x==2)
+			return orient2;
+		if(x==3)
+			return orient3;
+		if(x==4)
+			return orient4;
+		
+		return orient1;
+	}
 }

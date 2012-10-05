@@ -199,6 +199,11 @@ public class Turntris implements ApplicationListener
 			init();
 		}
 
+		if (Gdx.input.isKeyPressed(Keys.R))
+		{
+			rotate();
+		}
+
 		cursorTime += Gdx.graphics.getDeltaTime();
 		// System.out.println(cursorTime);
 
@@ -252,9 +257,34 @@ public class Turntris implements ApplicationListener
 
 	}
 
-	private boolean checkNeighbors()
+	private void rotate()
 	{
-		return true;
-	}
+		// ArrayList<Block> temp = new ArrayList<Block>();
+		int blocknum = 1;
+		int count = 2;
+		for (Block block : blocks)
+		{
+			if (cursor.insideCursor(block) == false)
+			{
+				if (count == 5)
+					count = 1;
+				block.setPosition(cursor.getOrient(count).getPositionX(), cursor.getOrient(count).getPositionY());
+				count++;
+			}
+			System.out.println(cursor.insideCursor(block) + Integer.toString(blocknum));
+			System.out.println(block.getRectangle());
+			blocknum++;
+		}
+		// temp.add(block);
+		// temp.get(0).setPosition(cursor.getOrient(2).getPositionX(),
+		// cursor.getOrient(2).getPositionY());
+		// temp.get(1).setPosition(cursor.getOrient(3).getPositionX(),
+		// cursor.getOrient(3).getPositionY());
+		// temp.get(2).setPosition(cursor.getOrient(4).getPositionX(),
+		// cursor.getOrient(4).getPositionY());
+		// temp.get(3).setPosition(cursor.getOrient(1).getPositionX(),
+		// cursor.getOrient(1).getPositionY());
 
+		// temp.clear();
+	}
 }
