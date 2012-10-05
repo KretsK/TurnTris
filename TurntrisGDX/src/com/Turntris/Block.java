@@ -59,10 +59,12 @@ public class Block
 	{
 		position.y = y;
 	}
+
 	public void setPosition(float x, float y)
 	{
-		position.x=x;
-		position.y=y;
+		position.x = x;
+		position.y = y;
+
 	}
 
 	public Rectangle getRectangle()
