@@ -1,5 +1,6 @@
 package com.Turntris;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -198,6 +199,11 @@ public class Turntris implements ApplicationListener
 		{
 			init();
 		}
+		
+		if (Gdx.input.isKeyPressed(Keys.R))
+		{
+			rotate();
+		}
 
 		cursorTime += Gdx.graphics.getDeltaTime();
 		// System.out.println(cursorTime);
@@ -252,9 +258,22 @@ public class Turntris implements ApplicationListener
 
 	}
 
-	private boolean checkNeighbors()
+	private void rotate()
 	{
-		return true;
+		ArrayList<Block> temp =new ArrayList<Block>();
+		for (Block block : blocks)
+			if(cursor.insideCursor(block)==false)
+				temp.add(block);
+		temp.get(0).setPositionX(cursor.getOrient(2).getPositionX());
+		temp.get(0).setPositionY(cursor.getOrient(2).getPositionY());
+		temp.get(1).setPositionX(cursor.getOrient(3).getPositionX());
+		temp.get(1).setPositionY(cursor.getOrient(3).getPositionY());
+		temp.get(2).setPositionX(cursor.getOrient(4).getPositionX());
+		temp.get(2).setPositionY(cursor.getOrient(4).getPositionY());
+		temp.get(3).setPositionX(cursor.getOrient(1).getPositionX());
+		temp.get(3).setPositionY(cursor.getOrient(1).getPositionY());
+		
+		temp.clear();
 	}
 
 }
