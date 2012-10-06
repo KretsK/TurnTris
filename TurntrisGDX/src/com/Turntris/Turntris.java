@@ -38,6 +38,9 @@ public class Turntris implements ApplicationListener
 	Array<Block> blocks;
 	Cursor cursor;
 	float cursorTime;
+	boolean cursorMoved;
+	int orientNum = 1;
+	float rotateTime;
 
 	@Override
 	public void create()
@@ -114,6 +117,7 @@ public class Turntris implements ApplicationListener
 		}
 
 		cursor = new Cursor();
+		cursorMoved = false;
 	}
 
 	@Override
@@ -153,6 +157,8 @@ public class Turntris implements ApplicationListener
 
 		batch.end();
 
+		cursorMoved = false;
+
 		if (Gdx.input.isTouched())
 		{
 			Vector3 touchPos = new Vector3();
@@ -164,6 +170,7 @@ public class Turntris implements ApplicationListener
 		if (cursor.update(cursorTime))
 		{
 			cursorTime = 0;
+			cursorMoved = true;
 		}
 
 		if (Square.x < 0)
@@ -199,13 +206,15 @@ public class Turntris implements ApplicationListener
 			init();
 		}
 
-		if (Gdx.input.isKeyPressed(Keys.R))
+		if (Gdx.input.isKeyPressed(Keys.R) && rotateTime > .15)
 		{
 			rotate();
+			rotateTime = 0;
 		}
 
 		cursorTime += Gdx.graphics.getDeltaTime();
-		// System.out.println(cursorTime);
+		rotateTime += Gdx.graphics.getDeltaTime();
+		// System.out.println(rotateTime);
 
 		Iterator<Block> iterB = blocks.iterator();
 		while (iterB.hasNext())
@@ -259,32 +268,29 @@ public class Turntris implements ApplicationListener
 
 	private void rotate()
 	{
-		// ArrayList<Block> temp = new ArrayList<Block>();
-		int blocknum = 1;
-		int count = 2;
+
+		// int blocknum = 1;
+
+		if (cursorMoved)
+		{
+			orientNum = 1;
+		}
+
 		for (Block block : blocks)
 		{
 			if (cursor.insideCursor(block) == false)
 			{
-				if (count == 5)
-					count = 1;
-				block.setPosition(cursor.getOrient(count).getPositionX(), cursor.getOrient(count).getPositionY());
-				count++;
-			}
-			System.out.println(cursor.insideCursor(block) + Integer.toString(blocknum));
-			System.out.println(block.getRectangle());
-			blocknum++;
-		}
-		// temp.add(block);
-		// temp.get(0).setPosition(cursor.getOrient(2).getPositionX(),
-		// cursor.getOrient(2).getPositionY());
-		// temp.get(1).setPosition(cursor.getOrient(3).getPositionX(),
-		// cursor.getOrient(3).getPositionY());
-		// temp.get(2).setPosition(cursor.getOrient(4).getPositionX(),
-		// cursor.getOrient(4).getPositionY());
-		// temp.get(3).setPosition(cursor.getOrient(1).getPositionX(),
-		// cursor.getOrient(1).getPositionY());
+				block.setPosition(cursor.getOrient(orientNum).getPositionX(), cursor.getOrient(orientNum).getPositionY());
 
-		// temp.clear();
+				orientNum = (orientNum + 1) % 4;
+			}
+			// System.out.println(cursor.insideCursor(block) +
+			// Integer.toString(blocknum));
+			// System.out.println(block.getRectangle());
+
+			// blocknum++;
+		}
+		orientNum = (orientNum + 1) % 4;
+
 	}
 }

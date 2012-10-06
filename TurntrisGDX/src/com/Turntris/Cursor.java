@@ -12,10 +12,10 @@ public class Cursor
 {
 
 	private int randSprite = 1;
+	private Orientation orient0;
 	private Orientation orient1;
 	private Orientation orient2;
 	private Orientation orient3;
-	private Orientation orient4;
 	private ArrayList<Orientation> Shape;
 
 	public Cursor()
@@ -25,53 +25,53 @@ public class Cursor
 
 		if (randSprite == 1) // for a Square
 		{
-			orient1 = new Orientation(SpriteType.Corner, Rotation.Zero, 0, 1);
-			orient2 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1, 0);
-			orient4 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
+			orient1 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1, 0);
+			orient2 = new Orientation(SpriteType.Corner, Rotation.Zero, 0, 1);
+			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
 		}
 
 		if (randSprite == 2) // for a L
 		{
-			orient1 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
+			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 0);
 			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
-			orient4 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 0);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
 		}
 
 		if (randSprite == 3) // for a t
 		{
-			orient1 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
-			orient2 = new Orientation(SpriteType.Edge, Rotation.Zero, 0, 1);
-			orient3 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
-			orient4 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 1);
+			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
+			orient1 = new Orientation(SpriteType.Edge, Rotation.Zero, 0, 1);
+			orient2 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 1);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
 		}
 
 		if (randSprite == 4) // for a |
 		{
-			orient1 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3);
+			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
+			orient1 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1);
 			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 2);
-			orient3 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1);
-			orient4 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3);
 		}
 
 		if (randSprite == 5) // for a z
 		{
-			orient1 = new Orientation(SpriteType.End, Rotation.Ninety, 0, 1);
-			orient2 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.Ninety, 1, 0);
-			orient4 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 1, 0);
+			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0);
+			orient2 = new Orientation(SpriteType.End, Rotation.Ninety, 0, 1);
+			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
 		}
 
-		Shape = new ArrayList<Orientation>(Arrays.asList(orient1, orient2, orient3, orient4));
+		Shape = new ArrayList<Orientation>(Arrays.asList(orient0, orient1, orient2, orient3));
 	}
 
 	public void draw(SpriteBatch batch)
 	{
+		orient0.draw(batch);
 		orient1.draw(batch);
 		orient2.draw(batch);
 		orient3.draw(batch);
-		orient4.draw(batch);
 	}
 
 	public boolean update(float time)
@@ -118,25 +118,30 @@ public class Cursor
 
 	public boolean insideCursor(Block block)
 	{
-		if (orient1.getRectangle().overlaps(block.getRectangle()) || orient2.getRectangle().overlaps(block.getRectangle()) || orient3.getRectangle().overlaps(block.getRectangle()) || orient4.getRectangle().overlaps(block.getRectangle()))
+		if (orient0.getRectangle().overlaps(block.getRectangle()) || orient1.getRectangle().overlaps(block.getRectangle()) || orient2.getRectangle().overlaps(block.getRectangle()) || orient3.getRectangle().overlaps(block.getRectangle()))
 		{
 			// dropSound.play();
 			return false;
 		}
 		return true;
 	}
-	
+
 	public Orientation getOrient(int x)
 	{
-		if(x==1)
+		if (x == 0)
+			return orient0;
+		if (x == 1)
 			return orient1;
-		if(x==2)
+		if (x == 2)
 			return orient2;
-		if(x==3)
+		if (x == 3)
 			return orient3;
-		if(x==4)
-			return orient4;
-		
-		return orient1;
+
+		return null;
+	}
+
+	public ArrayList<Orientation> getShape()
+	{
+		return Shape;
 	}
 }
