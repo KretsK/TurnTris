@@ -217,19 +217,24 @@ public class Turntris implements ApplicationListener
 		rotateTime += Gdx.graphics.getDeltaTime();
 		// System.out.println(rotateTime);
 
-		Iterator<Block> iterB = blocks.iterator();
-		while (iterB.hasNext())
+		// Iterator<Block> iterB = blocks.iterator();
+		// while (iterB.hasNext())
+		// {
+		// // Block block = iterB.next();
+		//
+		// // iterB.remove();
+		//
+		// }
+
+		for (Block block : blocks)
 		{
-			Block block = iterB.next();
-			if (cursor.insideCursor(block) == false && cursor.insideCursor(iterB.next()) == false)
+			if (blocks.indexOf(block, true) > 10)
 			{
-				if (block.getColor().equals(iterB.next().getColor()))
+				if (blocks.get(blocks.indexOf(block, true) - 10) == null)
 				{
-					// iterB.remove();
+					block.gravity();
 				}
-
 			}
-
 		}
 
 	}
@@ -301,7 +306,7 @@ public class Turntris implements ApplicationListener
 
 			for (Block block : inCursor)
 			{
-				blocks.removeValue(blocks.get(blocks.indexOf(block, true)), true);
+				blocks.removeValue(block, true);
 
 			}
 		}

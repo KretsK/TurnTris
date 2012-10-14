@@ -93,4 +93,9 @@ public class Block
 	{
 		return color;
 	}
+
+	public void gravity()
+	{
+		position.y = position.y - 100;
+	}
 }
