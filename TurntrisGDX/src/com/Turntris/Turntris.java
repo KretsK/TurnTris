@@ -1,5 +1,6 @@
 package com.Turntris;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -270,6 +271,8 @@ public class Turntris implements ApplicationListener
 	{
 
 		// int blocknum = 1;
+		ArrayList<Block> inCursor = new ArrayList<Block>();
+		inCursor.clear();
 
 		if (cursorMoved)
 		{
@@ -283,6 +286,7 @@ public class Turntris implements ApplicationListener
 				block.setPosition(cursor.getOrient(orientNum).getPositionX(), cursor.getOrient(orientNum).getPositionY());
 
 				orientNum = (orientNum + 1) % 4;
+				inCursor.add(block);
 			}
 			// System.out.println(cursor.insideCursor(block) +
 			// Integer.toString(blocknum));
@@ -291,6 +295,16 @@ public class Turntris implements ApplicationListener
 			// blocknum++;
 		}
 		orientNum = (orientNum + 1) % 4;
+
+		if (inCursor.get(0).getColor().equals(inCursor.get(1).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(2).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(3).getColor()))
+		{
+
+			for (Block block : inCursor)
+			{
+				blocks.removeValue(blocks.get(blocks.indexOf(block, true)), true);
+
+			}
+		}
 
 	}
 }
