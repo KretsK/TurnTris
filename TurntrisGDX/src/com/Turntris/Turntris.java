@@ -82,22 +82,7 @@ public class Turntris implements ApplicationListener
 		SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
 		pail = new Sprite(SpriteSheet, 200, 1, 98, 98);
 
-		blocks = new Array<Block>();
-		for (int j = 0; j < 10; j++)
-		{
-			for (int i = 0; i < 10; i++)
-			{
-
-				Block temp = new Block();
-				temp.setPositionX(i * 100);
-				temp.setPositionY(j * 100);
-				blocks.add(temp);
-
-			}
-		}
-
-		cursor = new Cursor();
-
+		init();
 	}
 
 	public void init()
@@ -217,23 +202,19 @@ public class Turntris implements ApplicationListener
 		rotateTime += Gdx.graphics.getDeltaTime();
 		// System.out.println(rotateTime);
 
-		// Iterator<Block> iterB = blocks.iterator();
-		// while (iterB.hasNext())
-		// {
-		// // Block block = iterB.next();
-		//
-		// // iterB.remove();
-		//
-		// }
-
-		for (Block block : blocks)
+		for (int i = 0; i < blocks.size; i++)
 		{
-			if (blocks.indexOf(block, true) > 10)
+			Block block = blocks.get(i);
+			if (block != null)
 			{
-				if (blocks.get(blocks.indexOf(block, true) - 10) == null)
+				if (blocks.indexOf(block, true) >= 10)
 				{
-					block.gravity();
+					if (findPositionBelow(block.getPositionX(), block.getPositionY()) == null)
+					{
+						block.gravity();
+					}
 				}
+
 			}
 		}
 
@@ -242,21 +223,19 @@ public class Turntris implements ApplicationListener
 	@Override
 	public void pause()
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void resume()
 	{
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void dispose()
 	{
-		// TODO Auto-generated method stub
+
 		dropImage.dispose();
 		bucketImage.dispose();
 		dropSound.dispose();
@@ -275,7 +254,6 @@ public class Turntris implements ApplicationListener
 	private void rotate()
 	{
 
-		// int blocknum = 1;
 		ArrayList<Block> inCursor = new ArrayList<Block>();
 		inCursor.clear();
 
@@ -286,18 +264,17 @@ public class Turntris implements ApplicationListener
 
 		for (Block block : blocks)
 		{
-			if (cursor.insideCursor(block) == false)
+			if (block != null)
 			{
-				block.setPosition(cursor.getOrient(orientNum).getPositionX(), cursor.getOrient(orientNum).getPositionY());
+				if (cursor.insideCursor(block) == false)
+				{
+					block.setPosition(cursor.getOrient(orientNum).getPositionX(), cursor.getOrient(orientNum).getPositionY());
 
-				orientNum = (orientNum + 1) % 4;
-				inCursor.add(block);
+					orientNum = (orientNum + 1) % 4;
+					inCursor.add(block);
+				}
+
 			}
-			// System.out.println(cursor.insideCursor(block) +
-			// Integer.toString(blocknum));
-			// System.out.println(block.getRectangle());
-
-			// blocknum++;
 		}
 		orientNum = (orientNum + 1) % 4;
 
@@ -311,5 +288,21 @@ public class Turntris implements ApplicationListener
 			}
 		}
 
+	}
+
+	private Block findPositionBelow(float x, float y)
+	{
+		for (int i = 0; i < blocks.size; i++)
+		{
+			Block block = blocks.get(i);
+			if (block != null)
+			{
+				if (block.getPositionX() == x && block.getPositionY() == (y - 100))
+				{
+					return block;
+				}
+			}
+		}
+		return null;
 	}
 }
