@@ -207,12 +207,10 @@ public class Turntris implements ApplicationListener
 			Block block = blocks.get(i);
 			if (block != null)
 			{
-				if (blocks.indexOf(block, true) >= 10)
+
+				if (findPositionBelow(block.getPositionX(), block.getPositionY()) == null && block.getPositionY() > 0)
 				{
-					if (findPositionBelow(block.getPositionX(), block.getPositionY()) == null)
-					{
-						block.gravity();
-					}
+					block.gravity();
 				}
 
 			}
@@ -278,13 +276,15 @@ public class Turntris implements ApplicationListener
 		}
 		orientNum = (orientNum + 1) % 4;
 
-		if (inCursor.get(0).getColor().equals(inCursor.get(1).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(2).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(3).getColor()))
+		if (inCursor.size() == 4)
 		{
-
-			for (Block block : inCursor)
+			if (inCursor.get(0).getColor().equals(inCursor.get(1).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(2).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(3).getColor()))
 			{
-				blocks.removeValue(block, true);
+				for (Block block : inCursor)
+				{
+					blocks.removeValue(block, true);
 
+				}
 			}
 		}
 
