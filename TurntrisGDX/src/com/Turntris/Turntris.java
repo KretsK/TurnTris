@@ -1,7 +1,6 @@
 package com.Turntris;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -14,9 +13,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class Turntris implements ApplicationListener
 {
@@ -51,36 +48,16 @@ public class Turntris implements ApplicationListener
 		camera.setToOrtho(false, 1000, 1020);
 		batch = new SpriteBatch();
 
-		// load the images for the droplet and the bucket, 48x48 pixels each
-		bucketImage = new Texture(Gdx.files.internal("assets/bucket.png"));
-		dropImage = new Texture(Gdx.files.internal("assets/water-droplet.png"));
-
 		// load the drop sound effect and the rain background "music"
-		dropSound = Gdx.audio.newSound(Gdx.files.internal("assets/rainmusic 2.mp3"));
+		// dropSound =
+		// Gdx.audio.newSound(Gdx.files.internal("assets/rainmusic 2.mp3"));
 		// rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
 
 		// start the playback of the background music immediately
 		// rainMusic.setLooping(true);
 		// rainMusic.play();
-		bucket = new Rectangle();
-		bucket.x = 1000 / 2 - 100 / 2;
-		bucket.y = 20;
-		bucket.width = 100;
-		bucket.height = 100;
-
-		raindrops = new Array<Raindrop>();
-		spawnRaindrop();
 
 		// ***************************Turntris Code****************
-
-		Square = new Rectangle();
-		Square.x = 1000 / 2 - 10 / 2;
-		Square.y = 20;
-		Square.width = 100;
-		Square.height = 100;
-
-		SpriteSheet = new Texture(Gdx.files.internal("assets/TurntrisSprites.png"));
-		pail = new Sprite(SpriteSheet, 200, 1, 98, 98);
 
 		init();
 	}
@@ -126,14 +103,6 @@ public class Turntris implements ApplicationListener
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
-		pail.setPosition(Square.x, Square.y);
-		pail.draw(batch);
-
-		for (Raindrop drop : raindrops)
-		{
-			drop.draw(batch);
-		}
-
 		for (Block block : blocks)
 		{
 			block.draw(batch);
@@ -145,44 +114,18 @@ public class Turntris implements ApplicationListener
 
 		cursorMoved = false;
 
-		if (Gdx.input.isTouched())
-		{
-			Vector3 touchPos = new Vector3();
-			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			camera.unproject(touchPos);
-			Square.x = touchPos.x - 100 / 2;
-		}
+		// if (Gdx.input.isTouched())
+		// {
+		// Vector3 touchPos = new Vector3();
+		// touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+		// camera.unproject(touchPos);
+		// Square.x = touchPos.x - 100 / 2;
+		// }
 
 		if (cursor.update(cursorTime))
 		{
 			cursorTime = 0;
 			cursorMoved = true;
-		}
-
-		if (Square.x < 0)
-		{
-			Square.x = 0;
-		}
-
-		if (Square.x > 1000 - 10)
-		{
-			Square.x = 1000 - 10;
-		}
-
-		if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
-		{
-			spawnRaindrop();
-		}
-
-		Iterator<Raindrop> iter = raindrops.iterator();
-		while (iter.hasNext())
-		{
-			Raindrop raindrop = iter.next();
-			if (raindrop.update(Square) == false)
-			{
-				iter.remove();
-			}
-
 		}
 
 		// *********TurnTris Code************
@@ -234,18 +177,11 @@ public class Turntris implements ApplicationListener
 	public void dispose()
 	{
 
-		dropImage.dispose();
-		bucketImage.dispose();
-		dropSound.dispose();
+		// dropImage.dispose();
+		// bucketImage.dispose();
+		// dropSound.dispose();
 		// rainMusic.dispose();
 		batch.dispose();
-
-	}
-
-	private void spawnRaindrop()
-	{
-		raindrops.add(new Raindrop());
-		lastDropTime = TimeUtils.nanoTime();
 
 	}
 
