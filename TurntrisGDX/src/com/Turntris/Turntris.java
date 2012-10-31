@@ -7,46 +7,41 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class Turntris implements ApplicationListener
 {
 
-	Texture dropImage;
-	Texture bucketImage;
 	Sound dropSound;
 	Music rainMusic;
 	OrthographicCamera camera;
 	SpriteBatch batch;
-	Rectangle bucket;
-	Array<Raindrop> raindrops;
-	long lastDropTime;
-	Texture SquareImage;
-	Rectangle Square;
 
 	Texture SpriteSheet;
 
-	Sprite pail;
 	Array<Block> blocks;
 	Cursor cursor;
 	float cursorTime;
 	boolean cursorMoved;
 	int orientNum = 1;
 	float rotateTime;
+	private BitmapFont font;
+	HeaderLine line;
 
 	@Override
 	public void create()
 	{
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1000, 1020);
+		camera.setToOrtho(false, 1000, 1125);
 		batch = new SpriteBatch();
+		font = new BitmapFont();
 
 		// load the drop sound effect and the rain background "music"
 		// dropSound =
@@ -81,6 +76,9 @@ public class Turntris implements ApplicationListener
 
 		cursor = new Cursor();
 		cursorMoved = false;
+
+		line = new HeaderLine();
+
 	}
 
 	@Override
@@ -109,6 +107,13 @@ public class Turntris implements ApplicationListener
 		}
 
 		cursor.draw(batch);
+		line.draw(batch);
+
+		renderString("SCORE", 50, 1075, Color.MAGENTA, 2);
+		renderString("SCORE#", 50, 1035, Color.MAGENTA, 2);
+		renderString("TIME", 500, 1075, Color.MAGENTA, 2);
+		renderString("TIME#", 500, 1035, Color.MAGENTA, 2);
+		renderString("NEXT", 900, 1075, Color.MAGENTA, 2);
 
 		batch.end();
 
@@ -240,5 +245,12 @@ public class Turntris implements ApplicationListener
 			}
 		}
 		return null;
+	}
+
+	private void renderString(String content, float xCoord, float yCoord, Color filter, float scale)
+	{
+		font.setScale(scale);
+		font.setColor(filter);
+		font.draw(batch, content, xCoord, yCoord);
 	}
 }
