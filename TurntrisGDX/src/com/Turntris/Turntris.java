@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class Turntris implements ApplicationListener
 {
@@ -33,6 +34,8 @@ public class Turntris implements ApplicationListener
 	float rotateTime;
 	private BitmapFont font;
 	HeaderLine line;
+	private long oneSec;
+	private float time = 0;
 
 	@Override
 	public void create()
@@ -112,7 +115,7 @@ public class Turntris implements ApplicationListener
 		renderString("SCORE", 50, 1075, Color.MAGENTA, 2);
 		renderString("SCORE#", 50, 1035, Color.MAGENTA, 2);
 		renderString("TIME", 500, 1075, Color.MAGENTA, 2);
-		renderString("TIME#", 500, 1035, Color.MAGENTA, 2);
+		renderString(String.format("%.2f", time), 500, 1035, Color.MAGENTA, 2);
 		renderString("NEXT", 900, 1075, Color.MAGENTA, 2);
 
 		batch.end();
@@ -133,6 +136,12 @@ public class Turntris implements ApplicationListener
 			cursorMoved = true;
 		}
 
+		if (TimeUtils.nanoTime() - oneSec > 1000000000)
+		{
+			time += .01;
+			oneSec = 0;
+		}
+
 		// *********TurnTris Code************
 
 		if (Gdx.input.isKeyPressed(Keys.N))
@@ -148,7 +157,8 @@ public class Turntris implements ApplicationListener
 
 		cursorTime += Gdx.graphics.getDeltaTime();
 		rotateTime += Gdx.graphics.getDeltaTime();
-		// System.out.println(rotateTime);
+		oneSec += TimeUtils.nanoTime();
+		// System.out.println(oneSec);
 
 		for (int i = 0; i < blocks.size; i++)
 		{
