@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class Turntris implements ApplicationListener
 {
@@ -34,8 +33,11 @@ public class Turntris implements ApplicationListener
 	float rotateTime;
 	private BitmapFont font;
 	HeaderLine line;
-	private long oneSec;
-	private float time = 0;
+	private float oneSec;
+	private int seconds = 0;
+	private int minutes = 0;
+	private String timer;
+	private int score = 0;
 
 	@Override
 	public void create()
@@ -81,6 +83,7 @@ public class Turntris implements ApplicationListener
 		cursorMoved = false;
 
 		line = new HeaderLine();
+		score = 0;
 
 	}
 
@@ -101,6 +104,11 @@ public class Turntris implements ApplicationListener
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		camera.update();
 
+		timer = minutes + "." + seconds;
+		if (seconds < 10)
+		{
+			timer = minutes + ".0" + seconds;
+		}
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 
@@ -113,9 +121,10 @@ public class Turntris implements ApplicationListener
 		line.draw(batch);
 
 		renderString("SCORE", 50, 1075, Color.MAGENTA, 2);
-		renderString("SCORE#", 50, 1035, Color.MAGENTA, 2);
+		renderString(String.valueOf(score), 50, 1035, Color.MAGENTA, 2);
 		renderString("TIME", 500, 1075, Color.MAGENTA, 2);
-		renderString(String.format("%.2f", time), 500, 1035, Color.MAGENTA, 2);
+		renderString(timer, 500, 1035, Color.MAGENTA, 2);
+		// renderString(String.valueOf(time), 500, 1035, Color.MAGENTA, 2);
 		renderString("NEXT", 900, 1075, Color.MAGENTA, 2);
 
 		batch.end();
@@ -136,9 +145,14 @@ public class Turntris implements ApplicationListener
 			cursorMoved = true;
 		}
 
-		if (TimeUtils.nanoTime() - oneSec > 1000000000)
+		if (oneSec > 1)
 		{
-			time += .01;
+			seconds += 1;
+			if (seconds == 60)
+			{
+				minutes++;
+				seconds = 0;
+			}
 			oneSec = 0;
 		}
 
@@ -153,12 +167,14 @@ public class Turntris implements ApplicationListener
 		{
 			rotate();
 			rotateTime = 0;
+
 		}
 
 		cursorTime += Gdx.graphics.getDeltaTime();
 		rotateTime += Gdx.graphics.getDeltaTime();
-		oneSec += TimeUtils.nanoTime();
-		// System.out.println(oneSec);
+		// oneSec += TimeUtils.nanoTime();
+		oneSec += Gdx.graphics.getDeltaTime();
+		// System.out.println();
 
 		for (int i = 0; i < blocks.size; i++)
 		{
@@ -236,6 +252,7 @@ public class Turntris implements ApplicationListener
 					blocks.removeValue(block, true);
 
 				}
+				score = score + 40;
 			}
 		}
 
