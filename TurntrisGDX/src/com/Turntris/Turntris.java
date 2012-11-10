@@ -11,6 +11,7 @@ public class Turntris implements ApplicationListener
 	@Override
 	public void create()
 	{
+		Renderer.setVirtualResolution(1000, 1125);
 		StateManager.loadState(new GamePlayState());
 	}
 

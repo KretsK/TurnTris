@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
@@ -55,13 +56,16 @@ public class GamePlayState implements State
 	@Override
 	public void draw()
 	{
+		Gdx.gl.glClearColor(0.5f, 0.1f, 0.6f, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
 		for (Block block : blocks)
 		{
-			block.draw(Renderer.get().batch());
+			block.draw(Renderer.get().batch);
 		}
 
-		cursor.draw(Renderer.get().batch());
-		line.draw(Renderer.get().batch());
+		cursor.draw(Renderer.get().batch);
+		line.draw(Renderer.get().batch);
 
 		renderString("SCORE", 50, 1075, Color.MAGENTA, 2);
 		renderString(String.valueOf(score), 50, 1035, Color.MAGENTA, 2);
@@ -78,8 +82,6 @@ public class GamePlayState implements State
 		// arguments to glClearColor are the red, green
 		// blue and alpha component in the range [0,1]
 		// of the color to be used to clear the screen.
-		// Gdx.gl.glClearColor(0.5f, 0.1f, 0.6f, 1);
-		// Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		timer = minutes + "." + seconds;
 		if (seconds < 10)
@@ -222,7 +224,7 @@ public class GamePlayState implements State
 	{
 		font.setScale(scale);
 		font.setColor(filter);
-		font.draw(Renderer.get().batch(), content, xCoord, yCoord);
+		font.draw(Renderer.get().batch, content, xCoord, yCoord);
 	}
 
 	public void init()

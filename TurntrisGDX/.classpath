@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry exported="true" kind="lib" path="lib/gdx.jar" sourcepath="lib/gdx-sources.jar"/>
-	<classpathentry kind="lib" path="src/sps/lib/kryo-2.20-all.jar"/>
+	<classpathentry kind="lib" path="lib/sps-gamelib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
