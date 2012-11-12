@@ -17,8 +17,8 @@ import com.badlogic.gdx.utils.Array;
 
 public class GamePlayState implements State
 {
-	Sound dropSound;
-	Music rainMusic;
+	Sound fallBrick;
+	Music TurntrisMusic2;
 
 	Texture SpriteSheet;
 
@@ -42,13 +42,13 @@ public class GamePlayState implements State
 		font = new BitmapFont();
 
 		// load the drop sound effect and the rain background "music"
-		// dropSound =
-		// Gdx.audio.newSound(Gdx.files.internal("assets/rainmusic 2.mp3"));
-		// rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
+		fallBrick = Gdx.audio.newSound(Gdx.files.internal("assets/BricksFalling.mp3"));
+		// TurntrisMusic2 =
+		// Gdx.audio.newMusic(Gdx.files.internal("assets/TurntrisMusic3.wav"));
 
 		// start the playback of the background music immediately
-		// rainMusic.setLooping(true);
-		// rainMusic.play();
+		// TurntrisMusic2.setLooping(true);
+		// TurntrisMusic2.play();
 
 		init();
 	}
@@ -199,6 +199,7 @@ public class GamePlayState implements State
 
 				}
 				score = score + 40;
+				fallBrick.play();
 			}
 		}
 
