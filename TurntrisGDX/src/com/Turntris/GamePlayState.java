@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import sps.graphics.Renderer;
 import sps.states.State;
+import sps.states.StateManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -146,6 +147,12 @@ public class GamePlayState implements State
 			}
 		}
 
+		if (blocks.size <= 30)
+		{
+			StateManager.loadState(new LevelComplete());
+		}
+		System.out.println(blocks.size);
+
 	}
 
 	@Override
@@ -252,4 +259,5 @@ public class GamePlayState implements State
 		score = 0;
 
 	}
+
 }

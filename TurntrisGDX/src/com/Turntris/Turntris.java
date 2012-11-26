@@ -40,6 +40,7 @@ public class Turntris implements ApplicationListener
 			initial++;
 			StateManager.loadState(new GamePlayState());
 		}
+
 	}
 
 	@Override
