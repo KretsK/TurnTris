@@ -147,11 +147,12 @@ public class GamePlayState implements State
 			}
 		}
 
-		if (blocks.size <= 30)
+		if (blocks.size <= 85) // change back to 32 when done testing
 		{
+			init();
 			StateManager.loadState(new LevelComplete());
+
 		}
-		System.out.println(blocks.size);
 
 	}
 
@@ -256,7 +257,6 @@ public class GamePlayState implements State
 		cursorMoved = false;
 
 		line = new HeaderLine();
-		score = 0;
 
 	}
 

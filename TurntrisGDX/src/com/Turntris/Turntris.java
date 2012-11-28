@@ -10,13 +10,16 @@ import com.badlogic.gdx.Input.Keys;
 public class Turntris implements ApplicationListener
 {
 	private int initial = 0;
+	public static GamePlayState gamePlayState;
 
 	@Override
 	public void create()
 	{
+
 		Renderer.setVirtualResolution(1000, 1125);
 		StateManager.loadState(new Menu());
 		// Spx.setup();
+		gamePlayState = new GamePlayState();
 	}
 
 	@Override
@@ -38,7 +41,7 @@ public class Turntris implements ApplicationListener
 		if (initial == 0 && Gdx.input.isKeyPressed(Keys.ENTER))
 		{
 			initial++;
-			StateManager.loadState(new GamePlayState());
+			StateManager.loadState(gamePlayState);
 		}
 
 	}
