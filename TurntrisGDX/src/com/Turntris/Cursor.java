@@ -25,10 +25,10 @@ public class Cursor
 
 		if (randSprite == 1) // for a Square
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
-			orient1 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1, 0);
-			orient2 = new Orientation(SpriteType.Corner, Rotation.Zero, 0, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0, 0);
+			orient1 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1, 0, 1);
+			orient3 = new Orientation(SpriteType.Corner, Rotation.Zero, 0, 1, 3);
+			orient2 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1, 2);
 		}
 
 		if (randSprite == 2) // for a L
@@ -63,6 +63,8 @@ public class Cursor
 			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
 		}
 
+		// shape should be sorted based on orientation index, not the variable
+		// name.
 		Shape = new ArrayList<Orientation>(Arrays.asList(orient0, orient1, orient2, orient3));
 	}
 
@@ -116,14 +118,29 @@ public class Cursor
 		return false;
 	}
 
-	public boolean insideCursor(Block block)
+	public Orientation insideCursor(Block block)
 	{
-		if (orient0.getRectangle().overlaps(block.getRectangle()) || orient1.getRectangle().overlaps(block.getRectangle()) || orient2.getRectangle().overlaps(block.getRectangle()) || orient3.getRectangle().overlaps(block.getRectangle()))
+		// if (orient0.getRectangle().overlaps(block.getRectangle()) ||
+		// orient1.getRectangle().overlaps(block.getRectangle()) ||
+		// orient2.getRectangle().overlaps(block.getRectangle()) ||
+		// orient3.getRectangle().overlaps(block.getRectangle()))
+		// {
+		// // dropSound.play();
+		// return false;
+		// }
+		// return true;
+		//
+
+		for (Orientation orient : Shape)
 		{
-			// dropSound.play();
-			return false;
+			if (orient.getRectangle().overlaps(block.getRectangle()))
+			{
+				// System.out.println(orient.Index);
+				return orient;
+			}
 		}
-		return true;
+
+		return null;
 	}
 
 	public Orientation getOrient(int x)
@@ -137,6 +154,15 @@ public class Cursor
 		if (x == 3)
 			return orient3;
 
+		return null;
+	}
+
+	public Orientation getNextMove(Block block)
+	{
+		if (insideCursor(block) != null)
+		{
+			return getOrient((insideCursor(block).Index + 1) % 4);
+		}
 		return null;
 	}
 

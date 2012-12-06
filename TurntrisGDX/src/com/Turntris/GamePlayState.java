@@ -1,6 +1,8 @@
 package com.Turntris;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import sps.graphics.Renderer;
 import sps.states.State;
@@ -89,7 +91,6 @@ public class GamePlayState implements State
 		{
 			timer = minutes + ".0" + seconds;
 		}
-		cursorMoved = false;
 
 		// if (Gdx.input.isTouched())
 		// {
@@ -176,29 +177,35 @@ public class GamePlayState implements State
 		ArrayList<Block> inCursor = new ArrayList<Block>();
 		inCursor.clear();
 
-		if (cursorMoved)
-		{
-			orientNum = 1;
-		}
+		// if (cursorMoved)
+		// {
+		// orientNum = 1;
+		// cursorMoved = false;
+		// System.out.println("Reset OrientNum to 1");
+		// }
+
+		Map<Block, Orientation> nextMoves = new HashMap<Block, Orientation>();
 
 		for (Block block : blocks)
 		{
-			if (block != null)
+			if (block != null && cursor.getNextMove(block) != null)
 			{
-				if (cursor.insideCursor(block) == false)
-				{
-					block.setPosition(cursor.getOrient(orientNum).getPositionX(), cursor.getOrient(orientNum).getPositionY());
-
-					orientNum = (orientNum + 1) % 4;
-					inCursor.add(block);
-				}
+				inCursor.add(block);
+				nextMoves.put(block, cursor.getNextMove(block));
 
 			}
 		}
-		orientNum = (orientNum + 1) % 4;
 
 		if (inCursor.size() == 4)
 		{
+			System.out.println("honey monkey");
+			for (Block block : inCursor)
+			{
+				System.out.println(nextMoves.get(block).Index);
+				block.setPosition(nextMoves.get(block).getPositionX(), nextMoves.get(block).getPositionY());
+
+			}
+
 			if (inCursor.get(0).getColor().equals(inCursor.get(1).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(2).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(3).getColor()))
 			{
 				for (Block block : inCursor)

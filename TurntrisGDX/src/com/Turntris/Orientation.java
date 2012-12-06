@@ -10,10 +10,17 @@ public class Orientation
 	public int Y;
 	public Rotation Rotation;
 	private Sprite sprite;
+	public int Index;
 
 	private Rectangle position = new Rectangle();
 
+	@Deprecated
 	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y)
+	{
+		this(spritetype, rotation, x, y, 0);
+	}
+
+	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y, int index)
 	{
 		X = x;
 		Y = y;
@@ -26,6 +33,7 @@ public class Orientation
 
 		position.width = 99;
 		position.height = 99;
+		Index = index;
 
 	}
 
