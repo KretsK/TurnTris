@@ -33,34 +33,34 @@ public class Cursor
 
 		if (randSprite == 2) // for a L
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0);
-			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 0);
-			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0, 2);
+			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 0, 3);
+			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1, 1);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2, 0);
 		}
 
 		if (randSprite == 3) // for a t
 		{
-			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
-			orient1 = new Orientation(SpriteType.Edge, Rotation.Zero, 0, 1);
-			orient2 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 1);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2);
+			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0, 0);
+			orient1 = new Orientation(SpriteType.Edge, Rotation.Zero, 0, 1, 1);
+			orient2 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 1, 2);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2, 3);
 		}
 
 		if (randSprite == 4) // for a |
 		{
-			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0);
-			orient1 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1);
-			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 2);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3);
+			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0, 0);
+			orient1 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1, 1);
+			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 2, 2);
+			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3, 3);
 		}
 
 		if (randSprite == 5) // for a z
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 1, 0);
-			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0);
-			orient2 = new Orientation(SpriteType.End, Rotation.Ninety, 0, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1);
+			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 1, 0, 0);
+			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0, 1);
+			orient2 = new Orientation(SpriteType.End, Rotation.Ninety, 0, 1, 2);
+			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1, 3);
 		}
 
 		// shape should be sorted based on orientation index, not the variable
@@ -120,16 +120,6 @@ public class Cursor
 
 	public Orientation insideCursor(Block block)
 	{
-		// if (orient0.getRectangle().overlaps(block.getRectangle()) ||
-		// orient1.getRectangle().overlaps(block.getRectangle()) ||
-		// orient2.getRectangle().overlaps(block.getRectangle()) ||
-		// orient3.getRectangle().overlaps(block.getRectangle()))
-		// {
-		// // dropSound.play();
-		// return false;
-		// }
-		// return true;
-		//
 
 		for (Orientation orient : Shape)
 		{
@@ -145,14 +135,11 @@ public class Cursor
 
 	public Orientation getOrient(int x)
 	{
-		if (x == 0)
-			return orient0;
-		if (x == 1)
-			return orient1;
-		if (x == 2)
-			return orient2;
-		if (x == 3)
-			return orient3;
+		for (Orientation orient : Shape)
+		{
+			if (orient.Index == x)
+				return orient;
+		}
 
 		return null;
 	}
@@ -166,8 +153,4 @@ public class Cursor
 		return null;
 	}
 
-	public ArrayList<Orientation> getShape()
-	{
-		return Shape;
-	}
 }

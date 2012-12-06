@@ -28,7 +28,6 @@ public class GamePlayState implements State
 	Array<Block> blocks;
 	Cursor cursor;
 	float cursorTime;
-	boolean cursorMoved;
 	int orientNum = 1;
 	float rotateTime;
 	private BitmapFont font;
@@ -103,7 +102,6 @@ public class GamePlayState implements State
 		if (cursor.update(cursorTime))
 		{
 			cursorTime = 0;
-			cursorMoved = true;
 		}
 
 		if (oneSec > 1)
@@ -177,13 +175,6 @@ public class GamePlayState implements State
 		ArrayList<Block> inCursor = new ArrayList<Block>();
 		inCursor.clear();
 
-		// if (cursorMoved)
-		// {
-		// orientNum = 1;
-		// cursorMoved = false;
-		// System.out.println("Reset OrientNum to 1");
-		// }
-
 		Map<Block, Orientation> nextMoves = new HashMap<Block, Orientation>();
 
 		for (Block block : blocks)
@@ -198,10 +189,8 @@ public class GamePlayState implements State
 
 		if (inCursor.size() == 4)
 		{
-			System.out.println("honey monkey");
 			for (Block block : inCursor)
 			{
-				System.out.println(nextMoves.get(block).Index);
 				block.setPosition(nextMoves.get(block).getPositionX(), nextMoves.get(block).getPositionY());
 
 			}
@@ -261,7 +250,6 @@ public class GamePlayState implements State
 		}
 
 		cursor = new Cursor();
-		cursorMoved = false;
 
 		line = new HeaderLine();
 

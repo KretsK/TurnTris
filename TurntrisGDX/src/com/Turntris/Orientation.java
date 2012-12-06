@@ -14,12 +14,6 @@ public class Orientation
 
 	private Rectangle position = new Rectangle();
 
-	@Deprecated
-	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y)
-	{
-		this(spritetype, rotation, x, y, 0);
-	}
-
 	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y, int index)
 	{
 		X = x;
