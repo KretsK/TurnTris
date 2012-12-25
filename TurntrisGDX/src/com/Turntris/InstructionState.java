@@ -8,11 +8,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-public class Menu implements State
+public class InstructionState implements State
 {
-	private BitmapFont font;
 
-	public Menu()
+	private BitmapFont font;
+	public boolean inInstructionMenu = false;
+
+	public InstructionState()
 	{
 		font = new BitmapFont();
 	}
@@ -23,10 +25,12 @@ public class Menu implements State
 		Gdx.gl.glClearColor(0.5f, 0.1f, 0.6f, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		renderString("Press Enter to Play Game", 300, 600, Color.CYAN, 2);
-		renderString("TURNTRIS", 250, 800, Color.CYAN, 5);
-		renderString("Press the 'I' Key for Instructions", 300, 300, Color.CYAN, 2);
-		// TextPool.get().write("TURNTRIS", new Point2(500, 200));
+		renderString("Instructions", 450, 1000, Color.CYAN, 3);
+		renderString("Use the Arrow Keys to move the Cursor", 50, 800, Color.CYAN, 2);
+		renderString("Press the 'R' key to rotate the blocks that are inside the cursor", 50, 600, Color.CYAN, 2);
+		renderString("4 blocks of the same color will clear when rotated inside the cursor", 50, 400, Color.CYAN, 2);
+		renderString("Clear 30% of the blocks to continue", 50, 200, Color.CYAN, 2);
+
 	}
 
 	@Override
@@ -46,7 +50,7 @@ public class Menu implements State
 	@Override
 	public void update()
 	{
-		// TODO Auto-generated method stub
+		inInstructionMenu = true;
 
 	}
 

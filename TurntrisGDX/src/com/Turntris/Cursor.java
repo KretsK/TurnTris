@@ -153,4 +153,8 @@ public class Cursor
 		return null;
 	}
 
+	public void rotateCursor()
+	{
+
+	}
 }

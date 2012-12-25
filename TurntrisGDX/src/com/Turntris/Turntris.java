@@ -11,6 +11,7 @@ public class Turntris implements ApplicationListener
 {
 	private int initial = 0;
 	public static GamePlayState gamePlayState;
+	public static InstructionState instructionState;
 
 	@Override
 	public void create()
@@ -20,6 +21,7 @@ public class Turntris implements ApplicationListener
 		StateManager.loadState(new Menu());
 		// Spx.setup();
 		gamePlayState = new GamePlayState();
+		instructionState = new InstructionState();
 	}
 
 	@Override
@@ -41,6 +43,16 @@ public class Turntris implements ApplicationListener
 		if (initial == 0 && Gdx.input.isKeyPressed(Keys.ENTER))
 		{
 			initial++;
+			StateManager.loadState(gamePlayState);
+		}
+
+		if (Gdx.input.isKeyPressed(Keys.I))
+		{
+			StateManager.loadState(instructionState);
+		}
+
+		if (instructionState.inInstructionMenu == true && Gdx.input.isKeyPressed(Keys.Q))
+		{
 			StateManager.loadState(gamePlayState);
 		}
 
