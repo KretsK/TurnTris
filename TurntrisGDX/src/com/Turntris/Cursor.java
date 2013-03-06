@@ -1,8 +1,5 @@
 package com.Turntris;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,11 +9,8 @@ public class Cursor
 {
 
 	private int randSprite = 1;
-	private Orientation orient0;
-	private Orientation orient1;
-	private Orientation orient2;
-	private Orientation orient3;
-	private ArrayList<Orientation> Shape;
+
+	private Shape shape;
 
 	public Cursor()
 	{
@@ -25,55 +19,38 @@ public class Cursor
 
 		if (randSprite == 1) // for a Square
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0, 0);
-			orient1 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1, 0, 1);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.Zero, 0, 1, 3);
-			orient2 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1, 2);
+			shape = new SquareShape();
 		}
 
 		if (randSprite == 2) // for a L
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0, 2);
-			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 0, 3);
-			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1, 1);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2, 0);
+			shape = new Lshape();
 		}
 
 		if (randSprite == 3) // for a t
 		{
-			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0, 0);
-			orient1 = new Orientation(SpriteType.Edge, Rotation.Zero, 0, 1, 1);
-			orient2 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 1, 1, 2);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 2, 3);
+			shape = new Tshape();
 		}
 
 		if (randSprite == 4) // for a |
 		{
-			orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0, 0);
-			orient1 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1, 1);
-			orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 2, 2);
-			orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3, 3);
+			shape = new LineShape();
 		}
 
 		if (randSprite == 5) // for a z
 		{
-			orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 1, 0, 0);
-			orient1 = new Orientation(SpriteType.End, Rotation.TwoSeventy, 2, 0, 1);
-			orient2 = new Orientation(SpriteType.End, Rotation.Ninety, 0, 1, 2);
-			orient3 = new Orientation(SpriteType.Corner, Rotation.TwoSeventy, 1, 1, 3);
+			shape = new Zshape();
 		}
 
 		// shape should be sorted based on orientation index, not the variable
 		// name.
-		Shape = new ArrayList<Orientation>(Arrays.asList(orient0, orient1, orient2, orient3));
+		// shape = new ArrayList<Orientation>(Arrays.asList(orient0, orient1,
+		// orient2, orient3));
 	}
 
 	public void draw(SpriteBatch batch)
 	{
-		orient0.draw(batch);
-		orient1.draw(batch);
-		orient2.draw(batch);
-		orient3.draw(batch);
+		shape.draw(batch);
 	}
 
 	public boolean update(float time)
@@ -84,33 +61,7 @@ public class Cursor
 
 		if (time > .15)
 		{
-			boolean inBounds = true;
-			for (Orientation orient : Shape)
-			{
-				if (orient.getPositionX() + velocityX < 1000 && orient.getPositionX() + velocityX >= 0 && orient.getPositionY() + velocityY < 1000 && orient.getPositionY() + velocityY >= 0)
-				{
-					inBounds = true;
-				}
-				else
-				{
-					inBounds = false;
-					break;
-				}
-
-			}
-
-			if (inBounds == true)
-			{
-				for (Orientation orient : Shape)
-				{
-					orient.increment(velocityX, velocityY);
-				}
-			}
-
-			// Sets the limits of what the position can be by using the boundary
-			// conditions.
-			// position1.x = Math.max(Math.min(position1.x, 800), 0);
-			// position1.y = Math.max(Math.min(position1.y, 800), 0);
+			shape.moveIfinBounds(velocityX, velocityY);
 
 			if (velocityX != 0 || velocityY != 0)
 				return true;
@@ -121,7 +72,7 @@ public class Cursor
 	public Orientation insideCursor(Block block)
 	{
 
-		for (Orientation orient : Shape)
+		for (Orientation orient : shape)
 		{
 			if (orient.getRectangle().overlaps(block.getRectangle()))
 			{
@@ -135,7 +86,7 @@ public class Cursor
 
 	public Orientation getOrient(int x)
 	{
-		for (Orientation orient : Shape)
+		for (Orientation orient : shape)
 		{
 			if (orient.Index == x)
 				return orient;
