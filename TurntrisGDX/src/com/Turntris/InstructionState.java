@@ -29,7 +29,7 @@ public class InstructionState implements State
 		renderString("Use the Arrow Keys to move the Cursor", 50, 800, Color.CYAN, 2);
 		renderString("Press the 'R' key to rotate the blocks that are inside the cursor", 50, 600, Color.CYAN, 2);
 		renderString("4 blocks of the same color will clear when rotated inside the cursor", 50, 400, Color.CYAN, 2);
-		renderString("Clear 30% of the blocks to continue", 50, 200, Color.CYAN, 2);
+		renderString("Clear 30% of the blocks to continue. Press 'Q' to return to game.", 50, 200, Color.CYAN, 2);
 
 	}
 
