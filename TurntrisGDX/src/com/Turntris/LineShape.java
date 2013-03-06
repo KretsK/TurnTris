@@ -1,0 +1,12 @@
+package com.Turntris;
+
+public class LineShape extends Shape
+{
+	public LineShape()
+	{
+		orient0 = new Orientation(SpriteType.End, Rotation.OneEighty, 0, 0, 0);
+		orient1 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 1, 1);
+		orient2 = new Orientation(SpriteType.Middle, Rotation.Zero, 0, 2, 2);
+		orient3 = new Orientation(SpriteType.End, Rotation.Zero, 0, 3, 3);
+	}
+}
