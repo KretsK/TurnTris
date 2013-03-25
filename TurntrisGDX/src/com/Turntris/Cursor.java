@@ -69,37 +69,11 @@ public class Cursor
 		return false;
 	}
 
-	public Orientation insideCursor(Block block)
-	{
-
-		for (Orientation orient : shape)
-		{
-			if (orient.getRectangle().overlaps(block.getRectangle()))
-			{
-				// System.out.println(orient.Index);
-				return orient;
-			}
-		}
-
-		return null;
-	}
-
-	public Orientation getOrient(int x)
-	{
-		for (Orientation orient : shape)
-		{
-			if (orient.Index == x)
-				return orient;
-		}
-
-		return null;
-	}
-
 	public Orientation getNextMove(Block block)
 	{
-		if (insideCursor(block) != null)
+		if (shape.insideShape(block) != null)
 		{
-			return getOrient((insideCursor(block).Index + 1) % 4);
+			return shape.getOrient((shape.insideShape(block).Index + 1) % 4);
 		}
 		return null;
 	}

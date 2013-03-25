@@ -1,7 +1,6 @@
 package com.Turntris;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -18,7 +17,8 @@ public class Shape
 	{
 		// shape should be sorted based on orientation index, not the variable
 		// name.
-		Orients = new ArrayList<Orientation>(Arrays.asList(orient0, orient1, orient2, orient3));
+		// Orients = new ArrayList<Orientation>(Arrays.asList(orient0, orient1,
+		// orient2, orient3));
 	}
 
 	public void draw(SpriteBatch batch)
@@ -54,5 +54,31 @@ public class Shape
 			}
 		}
 
+	}
+
+	public Orientation getOrient(int x)
+	{
+		for (Orientation orient : Orients)
+		{
+			if (orient.Index == x)
+				return orient;
+		}
+
+		return null;
+	}
+
+	public Orientation insideShape(Block block)
+	{
+
+		for (Orientation orient : Orients)
+		{
+			if (orient.getRectangle().overlaps(block.getRectangle()))
+			{
+				// System.out.println(orient.Index);
+				return orient;
+			}
+		}
+
+		return null;
 	}
 }
