@@ -2,31 +2,47 @@ package com.Turntris;
 
 import java.util.ArrayList;
 
+import sps.core.Logger;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Shape
 {
 
-	protected Orientation orient0;
-	protected Orientation orient1;
-	protected Orientation orient2;
-	protected Orientation orient3;
 	protected ArrayList<Orientation> Orients;
 
 	public Shape()
 	{
+
 		// shape should be sorted based on orientation index, not the variable
 		// name.
 		// Orients = new ArrayList<Orientation>(Arrays.asList(orient0, orient1,
 		// orient2, orient3));
 	}
 
+	protected void setup(int[][] shapeArray)
+	{
+		Orients = new ArrayList<Orientation>();
+
+		for (int ii = 0; ii < shapeArray.length; ii++)
+		{
+			for (int jj = 0; jj < shapeArray[ii].length; jj++)
+			{
+				if (shapeArray[shapeArray.length - 1 - ii][jj] == 1)
+				{
+					Orients.add(new Orientation(SpriteType.Corner, Rotation.Ninety, jj, ii, 0));
+					Logger.info(jj + "," + ii);
+				}
+			}
+		}
+	}
+
 	public void draw(SpriteBatch batch)
 	{
-		orient0.draw(batch);
-		orient1.draw(batch);
-		orient2.draw(batch);
-		orient3.draw(batch);
+		for (Orientation orient : Orients)
+		{
+			orient.draw(batch);
+		}
 
 	}
 

@@ -16,6 +16,7 @@ public class Cursor
 	{
 
 		randSprite = MathUtils.random(1, 5);
+		// randSprite = 1;
 
 		if (randSprite == 1) // for a Square
 		{
