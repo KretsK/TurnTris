@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import sps.core.Logger;
 
+import com.Utils.RotateArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Shape
 {
 
 	protected ArrayList<Orientation> Orients;
+	private int[][] shapeArrayCache;
 
 	public Shape()
 	{
@@ -35,6 +37,8 @@ public class Shape
 				}
 			}
 		}
+
+		shapeArrayCache = shapeArray;
 	}
 
 	public void draw(SpriteBatch batch)
@@ -97,4 +101,14 @@ public class Shape
 
 		return null;
 	}
+
+	public void rotateShape()
+	{
+		if (shapeArrayCache != null)
+		{
+			RotateArray.clockwiseSquareInPlace(shapeArrayCache);
+			setup(shapeArrayCache);
+		}
+	}
+
 }

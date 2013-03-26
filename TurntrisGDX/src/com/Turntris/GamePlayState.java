@@ -30,6 +30,7 @@ public class GamePlayState implements State
 	float cursorTime;
 	int orientNum = 1;
 	float rotateTime;
+	float rotateShapeTime;
 	private BitmapFont font;
 	HeaderLine line;
 	private float oneSec;
@@ -119,6 +120,11 @@ public class GamePlayState implements State
 		{
 			init();
 		}
+		if (Gdx.input.isKeyPressed(Keys.S) && rotateShapeTime > .15)
+		{
+			cursor.rotateCursor();
+			rotateShapeTime = 0;
+		}
 
 		if (Gdx.input.isKeyPressed(Keys.R) && rotateTime > .15)
 		{
@@ -129,6 +135,7 @@ public class GamePlayState implements State
 
 		cursorTime += Gdx.graphics.getDeltaTime();
 		rotateTime += Gdx.graphics.getDeltaTime();
+		rotateShapeTime += Gdx.graphics.getDeltaTime();
 		oneSec += Gdx.graphics.getDeltaTime();
 		// System.out.println();
 
