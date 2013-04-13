@@ -3,7 +3,6 @@ package com.Turntris;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 
 public class Cursor
 {
@@ -15,7 +14,7 @@ public class Cursor
 	public Cursor()
 	{
 
-		randSprite = MathUtils.random(1, 5);
+		// randSprite = MathUtils.random(1, 5);
 
 		if (randSprite == 1) // for a Square
 		{

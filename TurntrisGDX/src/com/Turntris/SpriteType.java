@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public enum SpriteType
 {
 	End(0), Middle(400), Corner(200), Edge(600);
+
+	// add spritetype for no neighbors aka full square
 	private int Xaxis;
 	private static Texture SpriteSheet;
 

@@ -4,9 +4,9 @@ public class Lshape extends Shape
 {
 	public int[][] shapeArray =
 	{
-	{ 1, 0, 1, 1 },
-	{ 1, 0, 0, 1 },
-	{ 1, 0, 0, 1 },
+	{ 0, 0, 0, 0 },
+	{ 1, 0, 0, 0 },
+	{ 1, 0, 0, 0 },
 	{ 1, 1, 0, 0 } };
 
 	public Lshape()

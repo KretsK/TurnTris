@@ -8,19 +8,19 @@ public class Orientation
 {
 	public int X;
 	public int Y;
-	public Rotation Rotation;
+	public Rotation rotation;
 	private Sprite sprite;
 	public int Index;
 
 	private Rectangle position = new Rectangle();
 
-	public Orientation(SpriteType spritetype, Rotation rotation, int x, int y, int index)
+	public Orientation(SpriteType spritetype, Rotation angle, int x, int y, int index)
 	{
 		X = x;
 		Y = y;
-		Rotation = rotation;
+		rotation = angle;
 		sprite = spritetype.getSprite();
-		sprite.setRotation(Rotation.Degrees);
+		sprite.setRotation(rotation.Degrees);
 
 		position.x = X * 100;
 		position.y = Y * 100;
@@ -72,6 +72,18 @@ public class Orientation
 	{
 		position.x += x;
 		position.y += y;
+	}
+
+	public void setSprite(SpriteType spritetype)
+	{
+		sprite = spritetype.getSprite();
+	}
+
+	public void setRotation(Rotation angle)
+	{
+		rotation = angle;
+		sprite.setRotation(rotation.Degrees);
+
 	}
 
 }
