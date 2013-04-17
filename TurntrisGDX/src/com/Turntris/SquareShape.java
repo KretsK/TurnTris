@@ -12,8 +12,9 @@ public class SquareShape extends Shape
 
 	public SquareShape()
 	{
+		orientIndexes = new int[]
+		{ 0, 3, 1, 2 };
 		setup(shapeArray);
-
 		// orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0,
 		// 0);
 		// orient1 = new Orientation(SpriteType.Corner, Rotation.OneEighty, 1,

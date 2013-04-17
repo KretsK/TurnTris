@@ -1,6 +1,5 @@
 package com.Turntris;
 
-
 public class LineShape extends Shape
 {
 

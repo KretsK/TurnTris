@@ -12,6 +12,8 @@ public class Shape
 
 	protected ArrayList<Orientation> Orients;
 	private int[][] shapeArrayCache;
+	protected int[] orientIndexes =
+	{ 0, 1, 2, 3 };
 
 	public Shape()
 	{
@@ -33,8 +35,8 @@ public class Shape
 			{
 				if (shapeArray[shapeArray.length - 1 - ii][jj] == 1)
 				{
-					Orients.add(new Orientation(SpriteType.Corner, Rotation.Ninety, jj, ii, indexvalue));
-					Logger.info(jj + "," + ii);
+					Orients.add(new Orientation(SpriteType.Corner, Rotation.Ninety, jj, ii, indexvalue < orientIndexes.length ? orientIndexes[indexvalue] : indexvalue));
+					Logger.info(jj + "," + ii + "   index of " + (indexvalue < orientIndexes.length ? orientIndexes[indexvalue] : indexvalue));
 					indexvalue++;
 				}
 			}
@@ -130,8 +132,8 @@ public class Shape
 		{
 			if (Orients.get(iii).getRectangle().overlaps(block.getRectangle()))
 			{
-				System.out.println(Orients.get(iii).Index);
-				System.out.print(Orients.get(iii).getRectangle().overlaps(block.getRectangle()));
+				// System.out.println(Orients.get(iii).Index);
+				// System.out.print(Orients.get(iii).getRectangle().overlaps(block.getRectangle()));
 				return Orients.get(iii);
 			}
 		}

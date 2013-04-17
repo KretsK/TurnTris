@@ -5,7 +5,7 @@ package com.Turntris;
 //None, Left, Up, LeftUp, LeftRight, and LeftUpRight, and All
 public enum NeighborDetector
 {
-	None(0, SpriteType.End, Rotation.Zero),
+	None(0, SpriteType.Full, Rotation.Zero),
 	Left(1, SpriteType.End, Rotation.TwoSeventy),
 	Up(2, SpriteType.End, Rotation.OneEighty),
 	LeftUp(3, SpriteType.Corner, Rotation.OneEighty),
@@ -20,7 +20,7 @@ public enum NeighborDetector
 	DownRight(12, SpriteType.Corner, Rotation.Zero),
 	DownLeftRight(13, SpriteType.Edge, Rotation.TwoSeventy),
 	DownUpRight(14, SpriteType.Edge, Rotation.Zero),
-	DownLeftUpRight(15, SpriteType.Edge, Rotation.Zero);
+	DownLeftUpRight(15, SpriteType.None, Rotation.Zero);
 
 	private int bitwiseIndex;
 	public final SpriteType Frame;

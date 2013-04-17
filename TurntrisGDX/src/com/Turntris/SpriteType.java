@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public enum SpriteType
 {
-	End(0), Middle(400), Corner(200), Edge(600);
+	End(0), Middle(400), Corner(200), Edge(600), None(700), Full(800);
 
 	// add spritetype for no neighbors aka full square
 	private int Xaxis;

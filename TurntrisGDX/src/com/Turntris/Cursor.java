@@ -75,7 +75,7 @@ public class Cursor
 		{
 			return shape.getOrient((shape.insideShape(block).Index + 1) % 4);
 		}
-		System.out.println(shape.insideShape(block) + " no ");
+		// System.out.println(shape.insideShape(block) + " no ");
 
 		return null;
 	}

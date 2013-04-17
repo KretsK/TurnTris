@@ -11,6 +11,8 @@ public class Lshape extends Shape
 
 	public Lshape()
 	{
+		orientIndexes = new int[]
+		{ 0, 3, 1, 2 };
 		setup(shapeArray);
 
 		// orient0 = new Orientation(SpriteType.Corner, Rotation.Ninety, 0, 0,
