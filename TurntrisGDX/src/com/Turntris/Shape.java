@@ -42,27 +42,27 @@ public class Shape
 
 		for (Orientation orient : Orients)
 		{
-			int row = orient.X;
+			int row = shapeArrayCache.length - 1 - orient.X;
 			int col = orient.Y;
 
 			int bIndex = 0;
-			if (col - 1 >= 0 && shapeArrayCache[shapeArrayCache.length - 1 - row][col - 1] == 1)
+			if (col - 1 >= 0 && shapeArrayCache[row][col - 1] == 1)
 			{
 				bIndex += 1;
 			}
-			if (shapeArrayCache.length - 1 - row - 1 >= 0 && shapeArrayCache[shapeArrayCache.length - 1 - row - 1][col] == 1)
+			if (row - 1 >= 0 && shapeArrayCache[row - 1][col] == 1)
 			{
 				bIndex += 2;
 			}
 			// System.out.println("col# " + col);
 			// System.out.println("col+1Value  " + shapeArrayCache[row][col +
 			// 1]);
-			if (col + 1 < shapeArrayCache.length && shapeArrayCache[shapeArrayCache.length - 1 - row][col + 1] == 1)
+			if (col + 1 < shapeArrayCache.length && shapeArrayCache[row][col + 1] == 1)
 			{
 				bIndex += 4;
 				// System.out.println(shapeArrayCache[row][col]);
 			}
-			if (shapeArrayCache.length - 1 - row + 1 < shapeArrayCache.length && shapeArrayCache[shapeArrayCache.length - 1 - row + 1][col] == 1)
+			if (row + 1 < shapeArrayCache.length && shapeArrayCache[row + 1][col] == 1)
 			{
 				bIndex += 8;
 			}
