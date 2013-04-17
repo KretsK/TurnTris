@@ -25,6 +25,7 @@ public class Shape
 	protected void setup(int[][] shapeArray)
 	{
 		Orients = new ArrayList<Orientation>();
+		int indexvalue = 0;
 
 		for (int ii = 0; ii < shapeArray.length; ii++)
 		{
@@ -32,8 +33,9 @@ public class Shape
 			{
 				if (shapeArray[shapeArray.length - 1 - ii][jj] == 1)
 				{
-					Orients.add(new Orientation(SpriteType.Corner, Rotation.Ninety, jj, ii, 0));
+					Orients.add(new Orientation(SpriteType.Corner, Rotation.Ninety, jj, ii, indexvalue));
 					Logger.info(jj + "," + ii);
+					indexvalue++;
 				}
 			}
 		}
@@ -42,8 +44,8 @@ public class Shape
 
 		for (Orientation orient : Orients)
 		{
-			int row = shapeArrayCache.length - 1 - orient.X;
-			int col = orient.Y;
+			int row = shapeArrayCache.length - 1 - orient.Y;
+			int col = orient.X;
 
 			int bIndex = 0;
 			if (col - 1 >= 0 && shapeArrayCache[row][col - 1] == 1)
@@ -124,12 +126,13 @@ public class Shape
 	public Orientation insideShape(Block block)
 	{
 
-		for (Orientation orient : Orients)
+		for (int iii = 0; iii < Orients.size(); iii++)
 		{
-			if (orient.getRectangle().overlaps(block.getRectangle()))
+			if (Orients.get(iii).getRectangle().overlaps(block.getRectangle()))
 			{
-				// System.out.println(orient.Index);
-				return orient;
+				System.out.println(Orients.get(iii).Index);
+				System.out.print(Orients.get(iii).getRectangle().overlaps(block.getRectangle()));
+				return Orients.get(iii);
 			}
 		}
 

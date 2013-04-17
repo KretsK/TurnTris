@@ -186,10 +186,12 @@ public class GamePlayState implements State
 
 		for (Block block : blocks)
 		{
+			// System.out.println(cursor.getNextMove(block));
 			if (block != null && cursor.getNextMove(block) != null)
 			{
 				inCursor.add(block);
 				nextMoves.put(block, cursor.getNextMove(block));
+				System.out.println("put block into InCursor");
 
 			}
 		}
@@ -199,7 +201,7 @@ public class GamePlayState implements State
 			for (Block block : inCursor)
 			{
 				block.setPosition(nextMoves.get(block).getPositionX(), nextMoves.get(block).getPositionY());
-
+				System.out.println("set the block to new position.");
 			}
 
 			if (inCursor.get(0).getColor().equals(inCursor.get(1).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(2).getColor()) && inCursor.get(0).getColor().equals(inCursor.get(3).getColor()))
