@@ -1,14 +1,14 @@
 package com.Turntris;
 
-
 public class Tshape extends Shape
 {
 	public int[][] shapeArray =
 	{
-	{ 0, 0, 0, 0 },
-	{ 1, 0, 0, 0 },
-	{ 1, 1, 0, 0 },
-	{ 1, 0, 0, 0 } };
+
+	{ 0, 0, 0, 0, },
+	{ 1, 0, 0, 0, },
+	{ 1, 1, 0, 0, },
+	{ 1, 0, 0, 0, } };
 
 	public Tshape()
 	{

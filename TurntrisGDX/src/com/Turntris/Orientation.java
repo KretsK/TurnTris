@@ -3,6 +3,7 @@ package com.Turntris;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class Orientation
 {
@@ -31,10 +32,18 @@ public class Orientation
 
 	}
 
-	public void draw(SpriteBatch batch)
+	public void draw(SpriteBatch batch, Vector2 shapeposition)
 	{
-		sprite.setPosition(position.x, position.y);
+		// sprite.setPosition(position.x + (shapeposition.x * 100), position.y
+		// +(shapeposition.y * 100));// //add
+		sprite.setPosition((X + shapeposition.x) * 100, (Y + shapeposition.y) * 100);// //add
+
+		// shape
+		// position
+		// variable to these values
 		sprite.draw(batch);
+		// position.x = X + shapeposition.x;
+		// position.y = Y + shapeposition.y;
 	}
 
 	public float getPositionX()

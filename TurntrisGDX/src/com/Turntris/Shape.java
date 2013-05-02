@@ -6,6 +6,7 @@ import sps.core.Logger;
 
 import com.Utils.RotateArray;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class Shape
 {
@@ -14,6 +15,8 @@ public class Shape
 	private int[][] shapeArrayCache;
 	protected int[] orientIndexes =
 	{ 0, 1, 2, 3 };
+
+	private Vector2 shapePosition = new Vector2(0, 0);
 
 	public Shape()
 	{
@@ -83,7 +86,7 @@ public class Shape
 	{
 		for (Orientation orient : Orients)
 		{
-			orient.draw(batch);
+			orient.draw(batch, shapePosition);
 		}
 
 	}
@@ -106,10 +109,18 @@ public class Shape
 
 		if (inBounds == true)
 		{
+			int count = 0;
 			for (Orientation orient : Orients)
 			{
 				orient.increment(velocityX, velocityY);
+				if (count == 0)
+				{
+					shapePosition.x += velocityX / 100;
+					shapePosition.y += velocityY / 100;
+					count++;
+				}
 			}
+
 		}
 
 	}
