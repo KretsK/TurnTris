@@ -42,8 +42,8 @@ public class Orientation
 		// position
 		// variable to these values
 		sprite.draw(batch);
-		// position.x = X + shapeposition.x;
-		// position.y = Y + shapeposition.y;
+		position.x = (X + shapeposition.x) * 100;
+		position.y = (Y + shapeposition.y) * 100;
 	}
 
 	public float getPositionX()
